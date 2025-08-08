@@ -143,6 +143,7 @@ print(response)
 
 * Add authentication support if the Mythiq services are secured.
 * Integrate streaming responses for long‑running operations like music
-  generation.
+  generation
+  
 * Extend the router with a lightweight NLP model to better classify user
   intents and parameters.
