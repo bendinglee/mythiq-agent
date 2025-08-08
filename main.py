@@ -54,6 +54,7 @@ def main(argv: Optional[list[str]] = None) -> None:
         run_once(message)
     else:
         run_interactive()
+        
 
 
 if __name__ == "__main__":
