@@ -1,9 +1,26 @@
 [build]
-builder = "NIXPACKS"
+builder = "dockerfile"
 
 [deploy]
-startCommand = "python app.py"
 healthcheckPath = "/health"
-healthcheckTimeout = 300
-restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 10
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[env]
+PORT = "8000"
+PYTHONUNBUFFERED = "1"
+PYTHONPATH = "/app"
+
+# AI Provider API Keys (set these in Railway dashboard)
+# GROQ_API_KEY = ""
+# OPENROUTER_API_KEY = ""
+# TOGETHER_API_KEY = ""
+
+# Mythiq Service URLs (set these in Railway dashboard)
+# ASSISTANT_URL = "https://mythiq-assistant-production.up.railway.app"
+# GAME_URL = "https://mythiq-game-maker-production.up.railway.app"
+# MEDIA_URL = "https://mythiq-media-creator-production.up.railway.app"
+# AUDIO_URL = "https://mythiq-audio-creator-production.up.railway.app"
+# VIDEO_URL = "https://mythiq-video-creator-production.up.railway.app"
+

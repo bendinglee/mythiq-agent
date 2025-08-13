@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: mythiq-agent
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: PYTHONPATH
+        value: /app
+      # Add your API keys in Render dashboard:
+      # - key: GROQ_API_KEY
+      #   value: your_groq_api_key
+      # - key: OPENROUTER_API_KEY
+      #   value: your_openrouter_api_key
+      # - key: TOGETHER_API_KEY
+      #   value: your_together_api_key
+      # - key: ASSISTANT_URL
+      #   value: https://mythiq-assistant-production.up.railway.app
+      # - key: GAME_URL
+      #   value: https://mythiq-game-maker-production.up.railway.app
+      # - key: MEDIA_URL
+      #   value: https://mythiq-media-creator-production.up.railway.app
+      # - key: AUDIO_URL
+      #   value: https://mythiq-audio-creator-production.up.railway.app
+      # - key: VIDEO_URL
+      #   value: https://mythiq-video-creator-production.up.railway.app
+

@@ -1,0 +1,72 @@
+{
+  "name": "mythiq-agent",
+  "description": "Enhanced AI agent with multi-provider routing and Mythiq service integration",
+  "image": "heroku/python",
+  "stack": "heroku-22",
+  "keywords": ["python", "flask", "ai", "agent", "mythiq"],
+  "website": "https://github.com/bendinglee/mythiq-agent",
+  "repository": "https://github.com/bendinglee/mythiq-agent",
+  "success_url": "/health",
+  "env": {
+    "PORT": {
+      "description": "Port for the application to listen on",
+      "value": "8000"
+    },
+    "PYTHONUNBUFFERED": {
+      "description": "Disable Python output buffering",
+      "value": "1"
+    },
+    "PYTHONPATH": {
+      "description": "Python path for imports",
+      "value": "/app"
+    },
+    "GROQ_API_KEY": {
+      "description": "API key for Groq AI provider",
+      "required": false
+    },
+    "OPENROUTER_API_KEY": {
+      "description": "API key for OpenRouter AI provider",
+      "required": false
+    },
+    "TOGETHER_API_KEY": {
+      "description": "API key for Together AI provider",
+      "required": false
+    },
+    "ASSISTANT_URL": {
+      "description": "URL for Mythiq Assistant service",
+      "value": "https://mythiq-assistant-production.up.railway.app"
+    },
+    "GAME_URL": {
+      "description": "URL for Mythiq Game Maker service",
+      "value": "https://mythiq-game-maker-production.up.railway.app"
+    },
+    "MEDIA_URL": {
+      "description": "URL for Mythiq Media Creator service",
+      "value": "https://mythiq-media-creator-production.up.railway.app"
+    },
+    "AUDIO_URL": {
+      "description": "URL for Mythiq Audio Creator service",
+      "value": "https://mythiq-audio-creator-production.up.railway.app"
+    },
+    "VIDEO_URL": {
+      "description": "URL for Mythiq Video Creator service",
+      "value": "https://mythiq-video-creator-production.up.railway.app"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "addons": [],
+  "scripts": {
+    "postdeploy": "echo 'Mythiq Agent deployed successfully!'"
+  }
+}
+
