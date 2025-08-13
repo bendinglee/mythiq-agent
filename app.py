@@ -11,7 +11,7 @@ logger = logging.getLogger("mythiq")
 
 # Try to import the real MythiqAgent; fall back to a stub if missing
 try:
-    from mythiq_agent import MythiqAgent  # your real implementation
+    from mythiq_agent import MythiqAgent
     mythiq_agent = MythiqAgent()
     AGENT_SOURCE = "real"
 except Exception as e:
@@ -52,11 +52,14 @@ def health():
             "cpu_usage_percent": psutil.cpu_percent(interval=0.1),
             "agent_source": AGENT_SOURCE,
         }
-        # Keep this endpoint pure: no network calls, no heavy work
         return jsonify(system_info), 200
     except Exception as e:
         logger.exception("Health check failed")
         return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route("/agent-status", methods=["GET"])
+def agent_status():
+    return jsonify({"agent_source": AGENT_SOURCE}), 200
 
 @app.route("/", methods=["GET"])
 def root():
@@ -66,7 +69,8 @@ def root():
         "description": "Enhanced AI agent (paid providers disabled).",
         "endpoints": {
             "/health": "Health check",
-            "/chat": "Chat with Mythiq (local/stub)",
+            "/agent-status": "Check which agent is loaded",
+            "/chat": "Chat with Mythiq",
             "/process": "Process request through Mythiq Agent",
             "/capabilities": "Get agent capabilities",
             "/providers": "Get provider status"
@@ -82,7 +86,6 @@ def chat():
         if not message:
             return jsonify({"error": "Message is required"}), 400
 
-        # Simple local reply to keep things functional without paid APIs
         result = mythiq_agent.process(message, context)
         reply = result.get("reply") if isinstance(result, dict) else str(result)
 
@@ -123,7 +126,6 @@ def get_capabilities():
 
 @app.route("/providers", methods=["GET"])
 def get_providers():
-    # Paid providers disabled; report local only
     return jsonify({
         "local": {
             "name": "local",
@@ -143,5 +145,5 @@ def internal_error(error):
     return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
