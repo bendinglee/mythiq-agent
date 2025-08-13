@@ -1,16 +1,12 @@
 {
   "name": "mythiq-agent",
   "description": "Enhanced AI agent with multi-provider routing and Mythiq service integration",
-  "image": "heroku/python",
-  "stack": "heroku-22",
-  "keywords": ["python", "flask", "ai", "agent", "mythiq"],
-  "website": "https://github.com/bendinglee/mythiq-agent",
   "repository": "https://github.com/bendinglee/mythiq-agent",
-  "success_url": "/health",
+  "keywords": ["python", "flask", "ai", "agent", "mythiq"],
   "env": {
     "PORT": {
       "description": "Port for the application to listen on",
-      "value": "8000"
+      "value": "8080"
     },
     "PYTHONUNBUFFERED": {
       "description": "Disable Python output buffering",
@@ -64,9 +60,7 @@
       "url": "heroku/python"
     }
   ],
-  "addons": [],
   "scripts": {
     "postdeploy": "echo 'Mythiq Agent deployed successfully!'"
   }
 }
-
